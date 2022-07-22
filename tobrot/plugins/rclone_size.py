@@ -21,7 +21,7 @@ async def check_size_g(client, message):
     user_id = message.from_user.id 
     u_men = message.from_user.mention
     # await asyncio.sleep(EDIT_SLEEP_TIME_OUT)
-    del_it = await message.reply_text("`💾 Checking Cloud Size... Please Wait !!!`")
+    del_it = await message.reply_text("`Checking Cloud Size... Please Wait !!!`")
     if not os.path.exists("rclone.conf"):
         with open("rclone.conf", "w+", newline="\n", encoding="utf-8") as fole:
             fole.write(f"{RCLONE_CONFIG}")
@@ -43,7 +43,7 @@ async def check_size_g(client, message):
     LOGGER.info(gautam)
     await asyncio.sleep(5)
     gautam = gautam.replace("Total objects:", "┣🗄 **Total Files** :").replace("Total size:", "┣🗂 **Total Size** :")
-    await message.reply_text(f"┏━━━━ ☁ __GDriveInfo__ ☁ ━━━━━━╻\n┃\n┣👤 **User** : {u_men}\n┣🆔 **User ID** : #ID{user_id}\n┣🧾 **Folder Name** : `{DESTINATION_FOLDER}`\n{gautam}┃\n┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 {UPDATES_CHANNEL} ♦️━╹\n\n#CloudSize")
+    await message.reply_text(f"┏━━━━ ☁ __GDriveInfo__ ☁ ━━━━━━╻\n┃\n┣ **User** : {u_men}\n┣ **User ID** : #ID{user_id}\n┣🧾 **Folder Name** : `{DESTINATION_FOLDER}`\n{gautam}┃\n┗━♦️ **Powered by**: {UPDATES_CHANNEL} ♦️━╹\n\n#CloudSize")
     await del_it.delete()
 
 
@@ -54,15 +54,15 @@ async def g_clearme(client, message):
     inline_keyboard = []
     ikeyboard = []
     ikeyboard.append(
-        InlineKeyboardButton("Yes 🚫", callback_data=("fuckingdo").encode("UTF-8"))
+        InlineKeyboardButton("Yes ", callback_data=("fuckingdo").encode("UTF-8"))
     )
     ikeyboard.append(
-        InlineKeyboardButton("No 🤗", callback_data=("fuckoff").encode("UTF-8"))
+        InlineKeyboardButton("No ", callback_data=("fuckoff").encode("UTF-8"))
     )
     inline_keyboard.append(ikeyboard)
     reply_markup = InlineKeyboardMarkup(inline_keyboard)
     await message.reply_text(
-        "Are you sure? 🚫 This will delete all your downloads locally 🚫",
+        "Are you sure? This will delete all your downloads locally 🚫",
         reply_markup=reply_markup,
         quote=True,
     )

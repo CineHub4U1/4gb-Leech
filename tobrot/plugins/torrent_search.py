@@ -363,7 +363,7 @@ async def searchhelp(self, message):
 ┃• /rarbg <i>[search query]</i>
 ┃• /ts <i>[search query]</i>
 ┃
-┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 @FuZionX♦️━╹
+┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 @EaglesCloud♦️━╹
 '''
     await message.reply(help_string, parse_mode=enums.ParseMode.HTML)
     #sendMessage(help_string, context.bot, update)

@@ -60,7 +60,7 @@ async def status_message_f(
 ):  # weird code but 'This is the way' @gautamajay52
     aria_i_p = await aria_start()
     # Show All Downloads
-    to_edit = await message.reply("🧭 𝐆𝐞𝐭𝐭𝐢𝐧𝐠 𝐂𝐮𝐫𝐫𝐞𝐧𝐭 𝐒𝐭𝐚𝐭𝐮𝐬 . .")
+    to_edit = await message.reply("🕊 𝐆𝐞𝐭𝐭𝐢𝐧𝐠 𝐂𝐮𝐫𝐫𝐞𝐧𝐭 𝐒𝐭𝐚𝐭𝐮𝐬 . .")
     chat_id = int(message.chat.id)
     mess_id = int(to_edit.id)
     async with _lock:
@@ -86,24 +86,24 @@ async def status_message_f(
             if file.status == "active":
                 is_file = file.seeder
                 if is_file is None:
-                    msgg = f"┣🔰𝐂𝐨𝐧𝐧𝐞𝐜𝐭𝐢𝐨𝐧𝐬: <code>{file.connections}</code>"
+                    msgg = f"┣🕊 𝐂𝐨𝐧𝐧𝐞𝐜𝐭𝐢𝐨𝐧𝐬: <code>{file.connections}</code>"
                 else:
-                    msgg = f"┣🔰𝐒𝐞𝐞𝐝𝐬: <code>{file.num_seeders}</code> ┃ 🔰𝐏𝐞𝐞𝐫𝐬: <code>{file.connections}</code>"
+                    msgg = f"┣🕊 𝐒𝐞𝐞𝐝𝐬: <code>{file.num_seeders}</code> ┃ 🏵𝐏𝐞𝐞𝐫𝐬: <code>{file.connections}</code>"
 
                 percentage = int(file.progress_string(0).split('%')[0])
                 prog = "[{0}{1}]".format("".join([FINISHED_PROGRESS_STR for i in range(math.floor(percentage / 5))]),"".join([UN_FINISHED_PROGRESS_STR for i in range(20 - math.floor(percentage / 5))]))
                 msg += f"\n┏━━━━━━━━━━━━━━━━╻"
-                msg += f"\n┣🔰𝐍𝐚𝐦𝐞: <code>{downloading_dir_name}</code>"
-                msg += f"\n┣🔰𝐒𝐭𝐚𝐭𝐮𝐬: <i>Downloading...📥</i>"
+                msg += f"\n┣»𝐍𝐚𝐦𝐞: <code>{downloading_dir_name}</code>"
+                msg += f"\n┣»𝐒𝐭𝐚𝐭𝐮𝐬: <i>Downloading...📥</i>"
                 msg += f"\n┃<code>{prog}</code>"
-                msg += f"\n┣🔰𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐝: <code>{file.progress_string()}</code> <b>of</b> <code>{file.total_length_string()}</code>"
-                msg += f"\n┣🔰𝐒𝐩𝐞𝐞𝐝: <code>{file.download_speed_string()}</code>,"
-                msg += f"🔰𝐄𝐓𝐀: <code>{file.eta_string()}</code>"  
+                msg += f"\n┣»𝐃𝐨𝐰𝐧𝐥𝐨𝐚𝐝𝐞𝐝: <code>{file.progress_string()}</code> <b>of</b> <code>{file.total_length_string()}</code>"
+                msg += f"\n┣»𝐒𝐩𝐞𝐞𝐝: <code>{file.download_speed_string()}</code>,"
+                msg += f"𝐄𝐓𝐀: <code>{file.eta_string()}</code>"  
                 #umen = f'<a href="tg://user?id={file.message.from_user.id}">{file.message.from_user.first_name}</a>'
                 #msg += f"\n<b>👤User:</b> {umen} (<code>{file.message.from_user.id}</code>)"
                 #msg += f"\n<b>⚠️Warn:</b> <code>/warn {file.message.from_user.id}</code>"
                 msg += f"\n{msgg}"
-                msg += f"\n┣🔰𝐂𝐚𝐧𝐜𝐞𝐥: <code>/{CANCEL_COMMAND_G} {file.gid}</code>"
+                msg += f"\n┣⍄𝐂𝐚𝐧𝐜𝐞𝐥: <code>/{CANCEL_COMMAND_G} {file.gid}</code>"
                 msg += f"\n┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 {UPDATES_CHANNEL}♦️━╹\n"
 
         hr, mi, se = up_time(time.time() - BOT_START_TIME)
@@ -117,7 +117,7 @@ async def status_message_f(
         ms_g = (
             f"◆━━━━━━◆ ❃ ◆━━━━━━◆\n"
             f"┏━━━━━━━━━━━━━━┓\n"
-            f"┃ᑕᑭᑌ: <code>{cpu}%</code> ┃ ᖇᗩᗰ: <code>{ram}%</code>  ┃\n"
+            f"┃CPU: <code>{cpu}%</code> ┃ RAM: <code>{ram}%</code>  ┃\n"
             f"┃ᖴ: <code>{free}</code> ┃ᑌᑭ: <code>{hr}h{mi}m{se}s</code>┃\n"
             f"┃T: <code>{total}</code> ┃ᑌ: <code>{used}</code>┃\n"
             f"┗━━━━━━━━━━━━━━┛"
@@ -126,7 +126,7 @@ async def status_message_f(
         umen = f'<a href="tg://user?id={message.from_user.id}">{message.from_user.first_name}</a>'
         mssg = f"\n❣𝙎𝙩𝙖𝙩𝙪𝙨 𝙍𝙚𝙦𝙪𝙚𝙨𝙩𝙚𝙙 𝘽𝙮 : {umen} (<code>{message.from_user.id}</code>)\n◆━━━━━━◆ ❃ ◆━━━━━━◆"
         if msg == "":
-            msg = f"\n┏━━━━━━━━━━━━━━━╻\n┃\n┃ ⚠️ <b>No Active, Queued or Paused \n┃ Torrents / Direct Links ⚠️</b>\n┃\n┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 {UPDATES_CHANNEL}♦️━╹\n"
+            msg = f"\n┏━━━━━━━━━━━━━━━╻\n┃\n┃  <b>No Active, Queued or Paused \n┃ Torrents / Direct Links </b>\n┃\n┗━♦️ℙ𝕠𝕨𝕖𝕣𝕖𝕕 𝔹𝕪 {UPDATES_CHANNEL}♦️━╹\n"
             msg = mssg + "\n" + msg + "\n" + ms_g
             await to_edit.edit(msg)
             break
@@ -172,10 +172,10 @@ async def cancel_message_f(client, message):
                 downloads = aria_i_p.get_downloads(gid_list)
             aria_i_p.remove(downloads=downloads, force=True, files=True, clean=True)
             await i_m_s_e_g.edit_text(
-                f"⛔<b> Download Cancelled </b>⛔ :\n<code>{name} ({size})</code> By <a href='tg://user?id={message.from_user.id}'>{message.from_user.first_name}</a>"
+                f"<b> Download Cancelled </b>⛔ :\n<code>{name} ({size})</code> By <a href='tg://user?id={message.from_user.id}'>{message.from_user.first_name}</a>"
             )
         except Exception as e:
-            await i_m_s_e_g.edit_text("<i>⚠️ FAILED ⚠️</i>\n\n" + str(e) + "\n#Error")
+            await i_m_s_e_g.edit_text("<i> FAILED ⚠️</i>\n\n" + str(e) + "\n#Error")
     else:
         await message.delete()
 

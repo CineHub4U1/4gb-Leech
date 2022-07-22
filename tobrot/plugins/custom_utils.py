@@ -33,7 +33,7 @@ async def prefix_set(client, message):
     prefix_ = txt
     PRE_DICT[user_id_] = prefix_
 
-    pre_text = await lm.edit_text(f"⚡️<i><b>Custom Prefix Set Successfully</b></i> ⚡️ \n\n👤 <b>User :</b> {u_men}\n🆔 <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>Prefix :</b> <code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
+    pre_text = await lm.edit_text(f"<i><b>⍄ Custom Prefix Set Successfully</b></i> ⚡️ \n\n <b>⍄User :</b> {u_men}\n<b>⍄User ID :</b> <code>{user_id_}</code>\n🗃 <b>Prefix :</b> <code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
     
 
 async def caption_set(client, message):
@@ -59,7 +59,7 @@ async def caption_set(client, message):
         txt = txx[0]
     except:
         pass 
-    cap_text = await lk.edit_text(f"⚡️<i><b>Custom Caption Set Successfully</b></i> ⚡️ \n\n👤 <b>User :</b> {u_men}\n🆔 <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>Caption :</b>\n<code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
+    cap_text = await lk.edit_text(f"⍄<i><b>Custom Caption Set Successfully</b></i> ⚡️ \n\n⍄ <b>User :</b> {u_men}\n⍄ <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>Caption :</b>\n<code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
 
 
 async def template_set(client, message):
@@ -84,4 +84,4 @@ async def template_set(client, message):
         template_ = txt
         IMDB_TEMPLATE[user_id_] = template_
     
-        await lm.edit_text(f"⚡️<i><b>Custom Template Set Successfully</b></i> ⚡️ \n\n👤 <b>User :</b> {u_men}\n🆔 <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>IMDB Template :</b> \n<code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
+        await lm.edit_text(f"<i><b>Custom Template Set Successfully</b></i> ⚡️ \n\n⍄ <b>User :</b> {u_men}\n⍄ <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>IMDB Template :</b> \n<code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
