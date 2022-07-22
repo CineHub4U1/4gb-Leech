@@ -67,7 +67,7 @@ async def template_set(client, message):
     lm = await message.reply_text(
         text="`Checking Input ...`",
     )
-    user_id_ = message.from_user.id 
+    user_id_ = message.from_user.id
     u_men = message.from_user.mention
     tem_send = message.text.split(" ", maxsplit=1)
     reply_to = message.reply_to_message
@@ -83,5 +83,8 @@ async def template_set(client, message):
     else:
         template_ = txt
         IMDB_TEMPLATE[user_id_] = template_
-    
-        await lm.edit_text(f"<i><b>Custom Template Set Successfully</b></i> ⚡️ \n\n⍄ <b>User :</b> {u_men}\n⍄ <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>IMDB Template :</b> \n<code>{txt}</code>", parse_mode=enums.ParseMode.HTML)
+
+        await lm.edit_text(
+            f"<i><b>Custom Template Set Successfully</b></i> ⚡️ \n\n⍄ <b>User :</b> {u_men}\n⍄ <b>User ID :</b> <code>{user_id_}</code>\n🗃 <b>IMDB Template :</b> \n<code>{template_}</code>",
+            parse_mode=enums.ParseMode.HTML,
+        )

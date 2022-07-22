@@ -19,7 +19,7 @@ from tobrot.helper_funcs.exceptions import DirectDownloadLinkException
 drive_list = ['driveapp.in', 'gdflix.pro', 'drivelinks.in', 'drivesharer.in', 'driveflix.in', 'drivebit.in', 'drivehub.in', 'driveace.in']
 
 async def url_parser(client, message):
-   
+
     op = await message.reply_text(
         text="`Fetching Data . . .`",
         quote=True,
@@ -66,7 +66,7 @@ async def url_parser(client, message):
 
 
 async def bypass_link(text_url: str):
-    
+
     if "zippyshare.com" in text_url \
         or "osdn.net" in text_url \
         or "mediafire.com" in text_url \

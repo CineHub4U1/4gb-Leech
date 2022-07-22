@@ -8,8 +8,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, Message
 
 async def get_invite_link(client, chat_id):
     try:
-        invite_link = bot.create_chat_invite_link(chat_id=chat_id, member_limit=1)
-        return invite_link
+        return bot.create_chat_invite_link(chat_id=chat_id, member_limit=1)
     except FloodWait as e:
         LOGGER.info(f"FloodWait : Sleeping {e.value}s")
         await asyncio.sleep(e.value)
@@ -25,7 +24,10 @@ async def handle_force_sub(client, cmd: Message):
         return 200
     try:
         user = bot.get_chat_member(chat_id=channel_chat_id, user_id=cmd.from_user.id)
-        if user.status == enums.ChatMemberStatus.BANNED or user.status == enums.ChatMemberStatus.RESTRICTED:
+        if user.status in [
+            enums.ChatMemberStatus.BANNED,
+            enums.ChatMemberStatus.RESTRICTED,
+        ]:
             bot.reply_text(
                 text="**Sorry, You are Banned to Use me.**",
                 disable_web_page_preview=True
@@ -50,7 +52,4 @@ async def handle_force_sub(client, cmd: Message):
                 ])
         )
         return 400
-    #except Exception as err:
-        #LOGGER.info(f"Force Subscribe Error: {err}")
-        #return 200
     return 200

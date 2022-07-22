@@ -106,7 +106,7 @@ async def get_poster(query, bulk=False, id=False, file=None):
     else:
         plot = movie.get('plot outline')
     if plot and len(plot) > 800:
-        plot = plot[0:800] + "..."
+        plot = plot[:800] + "..."
 
     return {
         'title': movie.get('title'),
@@ -171,14 +171,7 @@ def list_to_hash(k):
 async def imdb_callback(bot, quer_y: CallbackQuery):
     i, movie, from_user = quer_y.data.split('#')
     imdb = await get_poster(query=movie, id=True)
-    btn = [
-            [
-                InlineKeyboardButton(
-                    text=f"⚡ 𝘊𝘭𝘪𝘤𝘬 𝘏𝘦𝘳𝘦 ⚡",
-                    url=imdb['url'],
-                )
-            ]
-        ]
+    btn = [[InlineKeyboardButton(text="⚡ 𝘊𝘭𝘪𝘤𝘬 𝘏𝘦𝘳𝘦 ⚡", url=imdb['url'])]]
     message = quer_y.message.reply_to_message or quer_y.message
     template = IMDB_TEMPLATE.get(from_user, "")
     LOGGER.info(IMDB_TEMPLATE)

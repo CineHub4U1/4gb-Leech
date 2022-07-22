@@ -50,26 +50,26 @@ from tobrot.plugins import is_appdrive_link, is_gdtot_link, is_hubdrive_link
 sys.setrecursionlimit(10 ** 4)
 
 async def aria_start():
-    aria2_daemon_start_cmd = []
-    # start the daemon, aria2c command
-    aria2_daemon_start_cmd.append("aria2c")
-    aria2_daemon_start_cmd.append("--conf-path=/app/tobrot/aria2/aria2.conf")
-    aria2_daemon_start_cmd.append("--allow-overwrite=true")
-    aria2_daemon_start_cmd.append("--daemon=true")
-    # aria2_daemon_start_cmd.append(f"--dir={DOWNLOAD_LOCATION}")
-    aria2_daemon_start_cmd.append("--enable-rpc")
-    aria2_daemon_start_cmd.append("--disk-cache=0")
-    aria2_daemon_start_cmd.append("--follow-torrent=mem")
-    aria2_daemon_start_cmd.append("--max-connection-per-server=16")
-    aria2_daemon_start_cmd.append("--min-split-size=10M")
-    aria2_daemon_start_cmd.append("--rpc-listen-all=false")
-    aria2_daemon_start_cmd.append(f"--rpc-listen-port={ARIA_TWO_STARTED_PORT}")
-    aria2_daemon_start_cmd.append("--rpc-max-request-size=1024M")
-    aria2_daemon_start_cmd.append("--seed-ratio=0.01")
-    aria2_daemon_start_cmd.append("--seed-time=1")
-    aria2_daemon_start_cmd.append("--max-overall-upload-limit=2M")
-    aria2_daemon_start_cmd.append("--split=16")
-    aria2_daemon_start_cmd.append(f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}")
+    aria2_daemon_start_cmd = [
+        "aria2c",
+        "--conf-path=/app/tobrot/aria2/aria2.conf",
+        "--allow-overwrite=true",
+        "--daemon=true",
+        "--enable-rpc",
+        "--disk-cache=0",
+        "--follow-torrent=mem",
+        "--max-connection-per-server=16",
+        "--min-split-size=10M",
+        "--rpc-listen-all=false",
+        f"--rpc-listen-port={ARIA_TWO_STARTED_PORT}",
+        "--rpc-max-request-size=1024M",
+        "--seed-ratio=0.01",
+        "--seed-time=1",
+        "--max-overall-upload-limit=2M",
+        "--split=16",
+        f"--bt-stop-timeout={MAX_TIME_TO_WAIT_FOR_TORRENTS_TO_START}",
+    ]
+
     LOGGER.info(aria2_daemon_start_cmd)
 
     process = await asyncio.create_subprocess_exec(
@@ -79,11 +79,11 @@ async def aria_start():
     )
     stdout, stderr = await process.communicate()
 
-    aria2 = aria2p.API(
-        aria2p.Client(host="http://localhost",
-                      port=ARIA_TWO_STARTED_PORT, secret="")
+    return aria2p.API(
+        aria2p.Client(
+            host="http://localhost", port=ARIA_TWO_STARTED_PORT, secret=""
+        )
     )
-    return aria2
 
 def add_magnet(aria_instance, magnetic_link, c_file_name):
     options = None
@@ -95,7 +95,7 @@ def add_magnet(aria_instance, magnetic_link, c_file_name):
             "⛔ **FAILED** ⛔ \n" + str(e) + " \n<b>⌧ Your link is Dead ⚰ .</b>",
         )
     else:
-        return True, "" + download.gid + ""
+        return True, f"{download.gid}"
 
 
 def add_torrent(aria_instance, torrent_file_path):
@@ -120,7 +120,7 @@ def add_torrent(aria_instance, torrent_file_path):
                 + " \n<b>⌧ Your Link is Slow to Process .</b>",
             )
         else:
-            return True, "" + download.gid + ""
+            return True, f"{download.gid}"
     else:
         return False, "⛔ **FAILED** ⛔ \n⌧ Please try other sources to get workable link to Process . . ."
 
@@ -192,7 +192,7 @@ def add_url(aria_instance, text_url, c_file_name):
             str(e) + " \n\n⌧ <i>Please do not send Slow links to Process.</i>",
         )
     else:
-        return True, "" + download.gid + ""
+        return True, f"{download.gid}"
 
 
 async def call_apropriate_function(
@@ -291,7 +291,7 @@ async def call_apropriate_function(
     #
     response = {}
     #LOGGER.info(response)
-    
+
     u_men = user_message.from_user.mention 
     user_id = user_message.from_user.id
     if com_g:
@@ -388,13 +388,11 @@ async def check_progress_for_dl(aria2, gid, event, previous_message):
                 await event.edit(
                     f"<i>⛔ Download Cancelled ⛔</i> :\n<code>{file.name} ({file.total_length_string()})</code>"
                 )
-                return
             else:
                 LOGGER.info(str(e))
-                await event.edit(
-                    "⛔ <u>ERROR</u> ⛔ :\n<code>{}</code> \n\n#Error".format(str(e))
-                )
-                return
+                await event.edit(f"⛔ <u>ERROR</u> ⛔ :\n<code>{str(e)}</code> \n\n#Error")
+
+            return
 
 
 # https://github.com/jaskaranSM/UniBorg/blob/6d35cf452bce1204613929d4da7530058785b6b1/stdplugins/aria.py#L136-L164
@@ -404,5 +402,5 @@ async def check_metadata(aria2, gid):
     if not file.followed_by_ids:
         return None
     new_gid = file.followed_by_ids[0]
-    LOGGER.info("Changing GID " + gid + " to " + new_gid)
+    LOGGER.info(f"Changing GID {gid} to {new_gid}")
     return new_gid

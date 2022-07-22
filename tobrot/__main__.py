@@ -75,8 +75,8 @@ from tobrot.helper_funcs.direct_link_generator import url_link_generate
 from tobrot.helper_funcs.download_aria_p_n import aria_start
 from tobrot.plugins import *
 from tobrot.plugins.call_back_button_handler import button
-from tobrot.plugins.imdb import imdb_search, imdb_callback 
-from tobrot.plugins.torrent_search import searchhelp, sendMessage 
+from tobrot.plugins.imdb import imdb_search, imdb_callback
+from tobrot.plugins.torrent_search import searchhelp, sendMessage
 from tobrot.plugins.custom_utils import prefix_set, caption_set, template_set
 from tobrot.plugins.url_parser import url_parser
 from tobrot.helper_funcs.bot_commands import BotCommands
@@ -104,29 +104,53 @@ from tobrot.plugins.status_message_fn import (
 
 if SET_BOT_COMMANDS:
     botcmds = [
-        (f'{BotCommands.LeechCommand}','📨 [Reply] Leech any Torrent/ Magnet/ Direct Link '),
+        (
+            f'{BotCommands.LeechCommand}',
+            '📨 [Reply] Leech any Torrent/ Magnet/ Direct Link ',
+        ),
         (f'{BotCommands.ExtractCommand}', '🔐 Unarchive items . .'),
-        (f'{BotCommands.ArchiveCommand}','🗜 Archive as .tar.gz acrhive... '),
-        (f'{BotCommands.ToggleDocCommand}','📂 Toggle to Document Upload '),
-        (f'{BotCommands.ToggleVidCommand}','🎞 Toggle to Streamable Upload '),
-        (f'{BotCommands.SaveCommand}','🖼 Save Thumbnail For Uploads'),
-        (f'{BotCommands.ClearCommand}','🕹 Clear Thumbnail '),
-        (f'{BotCommands.RenameCommand}','📧 [Reply] Rename Telegram File '),
-        (f'{BotCommands.StatusCommand}','🖲 Show Bot stats and concurrent Downloads'),
-        (f'{BotCommands.SpeedCommand}','📡 Get Current Server Speed of Your Bot'),
-        (f'{BotCommands.YtdlCommand}','🧲 [Reply] YT-DL Links for Uploading...'),
-        (f'{BotCommands.PytdlCommand}','🧧 [Reply] YT-DL Playlists Links for Uploading...'),
-        (f'gclone','♻️ [G-Drive] Clone Different Supported Sites !!'),
-        ('stats','📊 Show Bot Internal Statistics'),
-        (f'{BotCommands.MediaInfoCommand}','🆔️ [Reply] Get Telegram Files Media Info'),
-        (f'setpre','🔠 <Text> Save Custom Prefix for Uploads'),
-        (f'setcap','🔣 <Text> Save Custom Caption for Uploads'),
-        (f'parser','🧮 <URL> Get Bypassed Link After Parsing !!'),
-        (f'imdb','🎬 [Title] Get IMDb Details About It !!'),
-        (f'set_template','📋 [HTML] Set IMDb Custom Template for Usage!!'),
-        (f'{BotCommands.HelpCommand}','🆘 Get Help, How to Use and What to Do. . .'),
-        (f'{BotCommands.LogCommand}','🔀 Get the Bot Log [Owner Only]'),
-        (f'{BotCommands.TsHelpCommand}','🌐 Get help for Torrent Search Module'),
+        (f'{BotCommands.ArchiveCommand}', '🗜 Archive as .tar.gz acrhive... '),
+        (f'{BotCommands.ToggleDocCommand}', '📂 Toggle to Document Upload '),
+        (f'{BotCommands.ToggleVidCommand}', '🎞 Toggle to Streamable Upload '),
+        (f'{BotCommands.SaveCommand}', '🖼 Save Thumbnail For Uploads'),
+        (f'{BotCommands.ClearCommand}', '🕹 Clear Thumbnail '),
+        (f'{BotCommands.RenameCommand}', '📧 [Reply] Rename Telegram File '),
+        (
+            f'{BotCommands.StatusCommand}',
+            '🖲 Show Bot stats and concurrent Downloads',
+        ),
+        (
+            f'{BotCommands.SpeedCommand}',
+            '📡 Get Current Server Speed of Your Bot',
+        ),
+        (
+            f'{BotCommands.YtdlCommand}',
+            '🧲 [Reply] YT-DL Links for Uploading...',
+        ),
+        (
+            f'{BotCommands.PytdlCommand}',
+            '🧧 [Reply] YT-DL Playlists Links for Uploading...',
+        ),
+        ('gclone', '♻️ [G-Drive] Clone Different Supported Sites !!'),
+        ('stats', '📊 Show Bot Internal Statistics'),
+        (
+            f'{BotCommands.MediaInfoCommand}',
+            '🆔️ [Reply] Get Telegram Files Media Info',
+        ),
+        ('setpre', '🔠 <Text> Save Custom Prefix for Uploads'),
+        ('setcap', '🔣 <Text> Save Custom Caption for Uploads'),
+        ('parser', '🧮 <URL> Get Bypassed Link After Parsing !!'),
+        ('imdb', '🎬 [Title] Get IMDb Details About It !!'),
+        ('set_template', '📋 [HTML] Set IMDb Custom Template for Usage!!'),
+        (
+            f'{BotCommands.HelpCommand}',
+            '🆘 Get Help, How to Use and What to Do. . .',
+        ),
+        (f'{BotCommands.LogCommand}', '🔀 Get the Bot Log [Owner Only]'),
+        (
+            f'{BotCommands.TsHelpCommand}',
+            '🌐 Get help for Torrent Search Module',
+        ),
     ]
 
 async def start(client, message):
@@ -138,7 +162,7 @@ async def start(client, message):
             ]
             ]
     reply_markup=InlineKeyboardMarkup(buttons)
-    u_men = message.from_user.mention 
+    u_men = message.from_user.mention
     start_string = f'''
 ┏ <i>Dear {u_men}</i>,
 ┃
@@ -156,7 +180,10 @@ async def start(client, message):
            quote=True
         )
     else:
-        await message.reply_text(f"**I Am Alive and Working, Send /help to Know How to Use Me !** ✨", parse_mode=enums.ParseMode.MARKDOWN)
+        await message.reply_text(
+            "**I Am Alive and Working, Send /help to Know How to Use Me !** ✨",
+            parse_mode=enums.ParseMode.MARKDOWN,
+        )
 
 async def clean_all():
     aria2 = await aria_start()
@@ -202,7 +229,6 @@ async def restart(client, message:Message):
             await clean_all()
         except Exception as err:
             LOGGER.info(f"Restart Clean Error : {err}")
-            pass
         srun(["python3", "update.py"])
         with open(".restartmsg", "w") as f:
             f.truncate(0)
